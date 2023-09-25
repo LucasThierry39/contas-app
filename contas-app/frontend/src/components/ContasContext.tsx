@@ -1,5 +1,6 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 
-const ContasContext = createContext();
+const conta = {descricao:'Teste', valor:0, tipo:'r'}
+const ContasContext = createContext(conta);
 
 export default ContasContext;
