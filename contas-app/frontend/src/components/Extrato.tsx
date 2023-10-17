@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Conta } from "./Conta";
 
 interface Conta {
@@ -7,19 +8,18 @@ interface Conta {
   tipo: "pagar" | "receber";
 }
 export function Extrato() {
-  const contas: Conta[] = [
-    { id: 1, descricao: "Salario Outubro", valor: 2500, tipo: "receber" },
-    { id: 2, descricao: "Almoço", valor: 54.95, tipo: "pagar" },
-    { id: 3, descricao: "Transporte", valor: 372.95, tipo: "pagar" },
-    { id: 4, descricao: "Celular", valor: 199.9, tipo: "pagar" },
-    { id: 5, descricao: "Aluguel Sala Comercial", valor: 900, tipo: "receber" },
-    {
-      id: 6,
-      descricao: "Criação de Identidade Visual",
-      valor: 500.0,
-      tipo: "receber",
-    },
-  ];
+  // Aqui faremos a chamda para a API com AXios
+  // Buscaremos as contas no banco de dados via API-REST
+
+  const [contas, setContas] = useState<Conta[]>([]);
+  useEffect(() => {
+    fetch("http://localhost:3000/contas").then((response) => {
+      response.json().then((data) => {
+        console.log(data);
+        setContas(data)
+      });
+    });
+  }, []);
 
   const totalPagar = contas
     .filter((conta) => conta.tipo === "pagar")
@@ -73,23 +73,21 @@ export function Extrato() {
         </tbody>
       </table>
       <div className="flex justify-between mt-6 mb-6">
-          <div className="flex-col p-2 max-w-sm max-auto bg-gray-300 rounded-xl shadow-md flex items-center space-x-4 text-black">
-            <h3 className="font-semibold text-2xl">Total a receber:</h3>
-            <p className="font-semibold text-3xl text-gray-700">
-              R${totalReceber}
-            </p>
-          </div>
-          <div className="flex-col p-2 max-w-sm max-auto bg-red-300 rounded-xl shadow-md flex items-center space-x-4 text-black">
-            <h3 className="font-semibold text-2xl">Total a pagar:</h3>
-            <p className="font-semibold text-3xl text-red-700">
-              R${totalPagar}
-            </p>
-          </div>
+        <div className="flex-col p-2 max-w-sm max-auto bg-gray-300 rounded-xl shadow-md flex items-center space-x-4 text-black">
+          <h3 className="font-semibold text-2xl">Total a receber:</h3>
+          <p className="font-semibold text-3xl text-gray-700">
+            R${totalReceber}
+          </p>
+        </div>
+        <div className="flex-col p-2 max-w-sm max-auto bg-red-300 rounded-xl shadow-md flex items-center space-x-4 text-black">
+          <h3 className="font-semibold text-2xl">Total a pagar:</h3>
+          <p className="font-semibold text-3xl text-red-700">R${totalPagar}</p>
+        </div>
 
-          <div className="flex-col p-2 max-w-sm max-auto bg-green-300 rounded-xl shadow-md flex items-center space-x-4 text-black">
-            <h3 className="font-semibold text-2xl">Saldo:</h3>
-            <p className="font-semibold text-3xl text-green-700">R${saldo}</p>
-          </div>
+        <div className="flex-col p-2 max-w-sm max-auto bg-green-300 rounded-xl shadow-md flex items-center space-x-4 text-black">
+          <h3 className="font-semibold text-2xl">Saldo:</h3>
+          <p className="font-semibold text-3xl text-green-700">R${saldo}</p>
+        </div>
       </div>
     </div>
   );

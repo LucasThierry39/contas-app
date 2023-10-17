@@ -1,0 +1,35 @@
+{
+    "contas": [
+        { "id": 1, 
+        "descricao": "Salario Outubro", 
+        "valor": 2500,
+        "tipo": "receber"
+        },
+        { "id": 2, 
+        "descricao": "Almoço", 
+        "valor": 54.95, 
+        "tipo": "pagar"
+        },
+        { "id": 3, 
+        "descricao": "Transporte", 
+        "valor": 372.95,
+         "tipo": "pagar"
+        },
+        { "id": 4, 
+        "descricao": "Celular", 
+        "valor": 199.9,
+         "tipo": "pagar"
+        },
+        { "id": 5, 
+        "descricao": "Aluguel Sala Comercial",
+         "valor": 900,
+          "tipo": "receber"
+        },
+        {
+          "id": 6,
+          "descricao": "Criação de Identidade Visual",
+          "valor": 500.0,
+          "tipo": "receber"
+        }
+    ]
+}
